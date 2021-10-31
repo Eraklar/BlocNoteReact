@@ -1,11 +1,14 @@
+import { useImperativeHandle } from "react"
 
 
-export default function(props){
+export const Note = ({note, deleteNote, updateNote}) =>{
 
     return(
         <div className="note">
-            <h3>{props.title}</h3>
-            <div>{props.content}</div>
+            <h3>{note.currentTitle}</h3>
+            <div>{note.currentText}</div>
+            <button onClick={deleteNote}></button>
+            <button onClick={updateNote}></button>
         </div>
     )
 }

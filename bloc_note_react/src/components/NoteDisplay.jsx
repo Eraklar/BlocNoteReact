@@ -1,11 +1,11 @@
 import Showdown from 'showdown';
 import React from 'react';
 
-export default function NoteDisplay(props){
+export default function NoteDisplay({textToDisplay, title}){
 
     const converter = new Showdown.Converter()
 
-    const content = converter.makeHtml(props.textToDisplay);
+    const content = converter.makeHtml(textToDisplay);
 
     const createMarkup = () => {
         return {__html: content}
@@ -13,7 +13,7 @@ export default function NoteDisplay(props){
 
     return(
         <div>
-        <h1>{props.title}</h1>
+        <h1>{title}</h1>
         <div dangerouslySetInnerHTML={createMarkup()} />
         </div>
     )

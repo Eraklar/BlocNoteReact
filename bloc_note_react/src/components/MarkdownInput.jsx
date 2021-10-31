@@ -2,11 +2,11 @@ import { useState } from "react";
 import React from "react";
 
 
-export const MarkDownInput = ({ handleChangeText, handleChangeTitle, notes, save }) => {
+export const MarkDownInput = ({ handleChangeText, handleChangeTitle, currentTitle, currentText, save }) => {
     return(    
         <form onSubmit={save}>
-            <input type="text" value={notes.title} onChange={handleChangeTitle}/>
-            <textarea value={notes.content} onChange={handleChangeText}/>
+            <input type="text" value={currentTitle} onChange={handleChangeTitle}/>
+            <textarea value={currentText} onChange={handleChangeText}/>
             <input type="submit" value="save"/>
         </form>
     );
