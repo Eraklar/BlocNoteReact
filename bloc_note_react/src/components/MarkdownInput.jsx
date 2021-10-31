@@ -1,12 +1,13 @@
-
+import { useState } from "react";
 import React from "react";
-export default function MarkDownInput(props){
 
-    return(
-        <form>
-            <label>
-                <textarea value={props.text} onChange={props.handleChange}></textarea>
-            </label>
+
+export const MarkDownInput = ({ handleChangeText, handleChangeTitle, notes, save }) => {
+    return(    
+        <form onSubmit={save}>
+            <input type="text" value={notes.title} onChange={handleChangeTitle}/>
+            <textarea value={notes.content} onChange={handleChangeText}/>
+            <input type="submit" value="save"/>
         </form>
-    )
+    );
 }
