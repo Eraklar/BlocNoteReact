@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { useState } from "react";
 import { MarkDownInput } from "./components/MarkdownInput";
 import NoteDisplay from "./components/NoteDisplay";
@@ -11,7 +10,7 @@ function App() {
   const [notes, setNotes] = useState([]);
 
   const [currentText, setCurrentText] = useState("");
-
+  const [id, setId] = useState(nanoid);
   const [currentTitle, setCurrentTitle] = useState("");
 
   const handleChangeText = (event) => {
@@ -26,9 +25,9 @@ function App() {
     event.preventDefault();
     if (!currentText) return;
     const note = {
-      id: "121313",
-      title: currentTitle,
-      content: currentText,
+      id,
+      currentTitle,
+      currentText,
     };
     console.log(note);
     setNotes([...notes, note]);
