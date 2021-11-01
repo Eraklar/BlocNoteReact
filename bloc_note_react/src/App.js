@@ -18,9 +18,6 @@ function App() {
 
   const deleteNote = (note) => {
     setNotes(notes.filter((noteLol) => noteLol !== note));
-    setCurrentNote(null);
-    setCurrentText("");
-    setCurrentTitle("");
   };
 
   const handleChangeTitle = (event) => {
@@ -28,52 +25,40 @@ function App() {
   };
 
   const handleLoads = (note) => {
-    setCurrentText(note.currentText);
-    setCurrentTitle(note.currentTitle);
-    setCurrentNote(note);
-  };
-
-  const updateCurrentNote = () => {
-    const id = currentNote.id;
-    const note = {
-      id,
-      currentTitle,
-      currentText,
-    };
+    setCurrentText(note.text);
+    setCurrentTitle(note.title);
     setCurrentNote(note);
   };
 
   const handleSave = (event) => {
     event.preventDefault();
-    handleChangeTitle(event);
-    handleChangeText(event);
     if (!currentTitle || !currentText) return;
     if (currentNote) {
-      updateCurrentNote();
       editNote();
     } else {
       createNote();
     }
-
-    setCurrentNote(null);
     setCurrentText("");
     setCurrentTitle("");
+    setCurrentNote(null);
   };
 
   const editNote = () => {
-    setNotes(
-      notes.map((element) =>
-        element.id === currentNote.id ? currentNote : element
-      )
-    );
+    const id = currentNote.id;
+    const newNote = {
+      id,
+      title: currentTitle,
+      text: currentText,
+    };
+    setNotes(notes.map((element) => (element.id === id ? newNote : element)));
   };
 
   const createNote = () => {
     const id = nanoid();
     const newNote = {
       id,
-      currentTitle,
-      currentText,
+      title: currentTitle,
+      text: currentText,
     };
     setNotes((notes) => [...notes, newNote]);
   };
@@ -84,11 +69,11 @@ function App() {
     <div>
       <NoteDisplay textToDisplay={currentText} title={currentTitle} />
       <MarkDownInput
-        currentText={currentText}
-        currentTitle={currentTitle}
         handleChangeText={handleChangeText}
         handleChangeTitle={handleChangeTitle}
         handleSave={handleSave}
+        currentText={currentText}
+        currentTitle={currentTitle}
       />
       <NavNoteBar
         notes={notes}
