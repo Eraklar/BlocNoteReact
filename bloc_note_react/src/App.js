@@ -8,7 +8,7 @@ import { NavNoteBar } from "./components/NavNoteBar";
 
 function App() {
   const [notes, setNotes] = useState([]);
-
+  const [currentNote, setCurrentNote] = useState({});
   const [currentText, setCurrentText] = useState("");
   const [currentTitle, setCurrentTitle] = useState("");
 
@@ -32,19 +32,32 @@ function App() {
   const handleLoads = (note) => {
     setCurrentText(note.currentText);
     setCurrentTitle(note.currentTitle);
+    setCurrentNote(note);
   };
 
   const save = (event) => {
     event.preventDefault();
-    //verifier que l'id n'existe pas sinon on doit retrouver cette note et la changer
+    let isNew;
     if (!currentText) return;
-    const id = nanoid();
-    const note = {
-      id,
-      currentTitle,
-      currentText,
-    };
-    setNotes((notes) => [...notes, note]);
+    console.log(currentNote);
+    if (currentNote !== {}) {
+      const isNew = notes.find((element) => element.id === currentNote.id); // retourne une note
+      console.log(isNew);
+    }
+
+    console.log(isNew);
+    if (isNew !== undefined) {
+      setNotes(notes.map((element) => element.id === isNew.id));
+    } else {
+      const id = nanoid();
+      const newNote = {
+        id,
+        currentTitle,
+        currentText,
+      };
+      setNotes((notes) => [...notes, newNote]);
+    }
+
     setCurrentText("");
     setCurrentTitle("");
   };
