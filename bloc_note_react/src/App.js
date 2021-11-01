@@ -8,7 +8,7 @@ import { NavNoteBar } from "./components/NavNoteBar";
 
 function App() {
   const [notes, setNotes] = useState([]);
-  const [currentNote, setCurrentNote] = useState({});
+  const [currentNote, setCurrentNote] = useState(null);
   const [currentText, setCurrentText] = useState("");
   const [currentTitle, setCurrentTitle] = useState("");
 
@@ -18,11 +18,9 @@ function App() {
 
   const deleteNote = (note) => {
     setNotes(notes.filter((noteLol) => noteLol !== note));
-  };
-
-  const updateNote = (note) => {
-    setNotes(notes.map((element) => (element.id === note.id ? note : element)));
-    setCurrentText();
+    setCurrentNote(null);
+    setCurrentText("");
+    setCurrentTitle("");
   };
 
   const handleChangeTitle = (event) => {
@@ -35,31 +33,49 @@ function App() {
     setCurrentNote(note);
   };
 
-  const save = (event) => {
+  const updateCurrentNote = () => {
+    const id = currentNote.id;
+    const note = {
+      id,
+      currentTitle,
+      currentText,
+    };
+    setCurrentNote(note);
+  };
+
+  const handleSave = (event) => {
     event.preventDefault();
-    let isNew;
-    if (!currentText) return;
-    console.log(currentNote);
-    if (currentNote !== {}) {
-      const isNew = notes.find((element) => element.id === currentNote.id); // retourne une note
-      console.log(isNew);
-    }
-
-    console.log(isNew);
-    if (isNew !== undefined) {
-      setNotes(notes.map((element) => element.id === isNew.id));
+    handleChangeTitle(event);
+    handleChangeText(event);
+    if (!currentTitle || !currentText) return;
+    if (currentNote) {
+      updateCurrentNote();
+      editNote();
     } else {
-      const id = nanoid();
-      const newNote = {
-        id,
-        currentTitle,
-        currentText,
-      };
-      setNotes((notes) => [...notes, newNote]);
+      createNote();
     }
 
+    setCurrentNote(null);
     setCurrentText("");
     setCurrentTitle("");
+  };
+
+  const editNote = () => {
+    setNotes(
+      notes.map((element) =>
+        element.id === currentNote.id ? currentNote : element
+      )
+    );
+  };
+
+  const createNote = () => {
+    const id = nanoid();
+    const newNote = {
+      id,
+      currentTitle,
+      currentText,
+    };
+    setNotes((notes) => [...notes, newNote]);
   };
 
   console.log(notes);
@@ -72,12 +88,11 @@ function App() {
         currentTitle={currentTitle}
         handleChangeText={handleChangeText}
         handleChangeTitle={handleChangeTitle}
-        save={save}
+        handleSave={handleSave}
       />
       <NavNoteBar
         notes={notes}
         deleteNote={deleteNote}
-        updateNote={updateNote}
         handleLoads={handleLoads}
       />
     </div>
