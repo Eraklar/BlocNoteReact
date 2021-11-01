@@ -1,14 +1,13 @@
 import { useImperativeHandle } from "react"
 
 
-export const Note = ({note, deleteNote, updateNote}) =>{
+export const Note = ({note, deleteNote, handleLoads, updateNote}) =>{
 
     return(
-        <div className="note">
+        <div className="note" onClick={() => handleLoads(note)}>
             <h3>{note.currentTitle}</h3>
             <div>{note.currentText}</div>
-            <button onClick={deleteNote}></button>
-            <button onClick={updateNote}></button>
+            <button onClick={() => deleteNote(note)}>Delete</button>
         </div>
     )
 }

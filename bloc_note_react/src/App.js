@@ -16,16 +16,27 @@ function App() {
     setCurrentText(event.target.value);
   };
 
-  const deleteNote = (note) => {};
+  const deleteNote = (note) => {
+    setNotes(notes.filter((noteLol) => noteLol !== note));
+  };
 
-  const updateNote = () => {};
+  const updateNote = (note) => {
+    setNotes(notes.map((element) => (element.id === note.id ? note : element)));
+    setCurrentText();
+  };
 
   const handleChangeTitle = (event) => {
     setCurrentTitle(event.target.value);
   };
 
+  const handleLoads = (note) => {
+    setCurrentText(note.currentText);
+    setCurrentTitle(note.currentTitle);
+  };
+
   const save = (event) => {
     event.preventDefault();
+    //verifier que l'id n'existe pas sinon on doit retrouver cette note et la changer
     if (!currentText) return;
     const id = nanoid();
     const note = {
@@ -54,6 +65,7 @@ function App() {
         notes={notes}
         deleteNote={deleteNote}
         updateNote={updateNote}
+        handleLoads={handleLoads}
       />
     </div>
   );

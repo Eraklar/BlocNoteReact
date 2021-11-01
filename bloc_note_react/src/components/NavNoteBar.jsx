@@ -2,12 +2,13 @@ import React from "react";
 import { useNotes } from "../hooks/notesHooks";
 import { Note } from "./Note";
 
-export const NavNoteBar = ({notes, deleteNote, updateNote}) =>{
+export const NavNoteBar = ({notes, deleteNote, updateNote, handleLoads}) =>{
 
+  
   return (
     <ul>
       {notes.map((note) => 
-        <Note note={note} deleteNote={deleteNote} updateNote={updateNote}/>,
+        <Note note={note} key={note.id} deleteNote={deleteNote} updateNote={updateNote} handleLoads={handleLoads}/>,
       )}
     </ul>
   );
