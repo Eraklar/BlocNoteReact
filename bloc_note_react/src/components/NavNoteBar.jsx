@@ -5,10 +5,11 @@ export const NavNoteBar = ({notes, deleteNote, handleLoads}) =>{
 
   
   return (
-    <ul>
+    <div className="NavNoteBar">
+    
       {notes.map((note) => 
         <Note note={note} key={note.id} deleteNote={deleteNote} handleLoads={handleLoads}/>,
       )}
-    </ul>
+    </div>
   );
 };

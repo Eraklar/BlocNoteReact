@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+nav {
+  display: flex;
+  min-width: 300px;
+  height: 99vh;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+}
+
+.NavNoteBar {
+  min-height: 300px;
+  display: flex;
+  padding: 15px;
+  min-width: 250px;
+  border-radius: 15px 15px;
+  flex-direction: column;
+  justify-content: center;
+  background-color: blue;
+}
+
+.note {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid black;
+}
+
+.buttonSpace {
+  align-self: center;
+}
+
+.contentSpace {
+  flex: 1;
+}

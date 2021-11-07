@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MarkDownInput } from "./components/MarkdownInput";
 import NoteDisplay from "./components/NoteDisplay";
 import React from "react";
 import { nanoid } from "nanoid";
-
 import { NavNoteBar } from "./components/NavNoteBar";
 
 function App() {
@@ -43,6 +42,15 @@ function App() {
     setCurrentNote(null);
   };
 
+  useEffect(() => {
+    const notesTaken = JSON.parse(window.localStorage.getItem("notes"));
+    setNotes(notesTaken);
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem("notes", JSON.stringify(notes));
+  }, [notes]);
+
   const editNote = () => {
     const id = currentNote.id;
     const newNote = {
@@ -64,23 +72,27 @@ function App() {
   };
 
   console.log(notes);
-
   return (
-    <div>
-      <NoteDisplay textToDisplay={currentText} title={currentTitle} />
-      <MarkDownInput
-        handleChangeText={handleChangeText}
-        handleChangeTitle={handleChangeTitle}
-        handleSave={handleSave}
-        currentText={currentText}
-        currentTitle={currentTitle}
-      />
-      <NavNoteBar
-        notes={notes}
-        deleteNote={deleteNote}
-        handleLoads={handleLoads}
-      />
-    </div>
+    <>
+      <nav>
+        <NavNoteBar
+          notes={notes}
+          deleteNote={deleteNote}
+          handleLoads={handleLoads}
+        />
+      </nav>
+
+      <div className="contentSpace">
+        <NoteDisplay textToDisplay={currentText} title={currentTitle} />
+        <MarkDownInput
+          handleChangeText={handleChangeText}
+          handleChangeTitle={handleChangeTitle}
+          handleSave={handleSave}
+          currentText={currentText}
+          currentTitle={currentTitle}
+        />
+      </div>
+    </>
   );
 }
 

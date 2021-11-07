@@ -14,7 +14,8 @@ export default function NoteDisplay({textToDisplay, title}){
     return(
         <div>
         <h1>{title}</h1>
-        <div dangerouslySetInnerHTML={createMarkup()} />
+        <div 
+            dangerouslySetInnerHTML={createMarkup()} />
         </div>
     )
 
