@@ -83,14 +83,19 @@ function App() {
       </nav>
 
       <div className="contentSpace">
-        <NoteDisplay textToDisplay={currentText} title={currentTitle} />
-        <MarkDownInput
-          handleChangeText={handleChangeText}
-          handleChangeTitle={handleChangeTitle}
-          handleSave={handleSave}
-          currentText={currentText}
-          currentTitle={currentTitle}
-        />
+        <div className="display">
+          <NoteDisplay textToDisplay={currentText} title={currentTitle} />
+        </div>
+
+        <div className="markdown">
+          <MarkDownInput
+            handleChangeText={handleChangeText}
+            handleChangeTitle={handleChangeTitle}
+            handleSave={handleSave}
+            currentText={currentText}
+            currentTitle={currentTitle}
+          />
+        </div>
       </div>
     </>
   );

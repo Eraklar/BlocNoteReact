@@ -7,39 +7,110 @@
   width: 100vw;
   height: 100vh;
   display: flex;
+  background-color: #9ac8eb;
 }
 
 nav {
   display: flex;
-  min-width: 300px;
-  height: 99vh;
+  min-width: 20vw;
+  height: 99.5vh;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
+}
+
+.NavNoteBar h1 {
+  text-align: center;
+  padding: 5px;
 }
 
 .NavNoteBar {
-  min-height: 300px;
+  min-height: 30px;
   display: flex;
   padding: 15px;
   min-width: 250px;
   border-radius: 15px 15px;
   flex-direction: column;
   justify-content: center;
-  background-color: blue;
+  background-color: #f6f6f4;
 }
 
 .note {
   padding: 10px;
   display: flex;
   justify-content: space-between;
-  border: 1px solid black;
+  border: 1px solid rgb(133, 132, 132);
 }
 
 .buttonSpace {
   align-self: center;
 }
 
+.buttonSpace button {
+  padding: 4px;
+}
+
 .contentSpace {
-  flex: 1;
+  margin-left: 5%;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  flex: 0.5;
+}
+
+.display,
+.markdown {
+  max-height: 48vh;
+  margin-left: 5%;
+}
+
+.formMarkdown {
+  max-width: 48vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.formMarkdown textarea {
+  padding: 1vw;
+  min-height: 30vh;
+  width: 60vw;
+  max-height: 30vh;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+  border-radius: 15px;
+  background-color: #f6f6f4;
+}
+
+#saveInput {
+  padding: 10px 20px;
+  border-radius: 10px;
+  width: max-content;
+  background-color: #f6f6f4;
+}
+
+#titleInput {
+  padding-left: 1vw;
+  border-radius: 10px;
+  height: 5vh;
+  background-color: #f6f6f4;
+}
+
+.NoteDisplay {
+  width: 60vw;
+  height: 28vh;
+  padding: 1vw;
+  overflow: scroll;
+  border-radius: 15px 15px;
+  background-color: #f6f6f4;
+}
+
+.NoteDisplay div,
+.NoteDisplay h1 {
+  min-width: 35vw;
+  max-width: 70vw;
+  max-height: 30vh;
+}
+
+.NoteDisplay div {
+  margin-top: 3vh;
+  max-width: auto;
 }
